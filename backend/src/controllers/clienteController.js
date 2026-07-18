@@ -16,6 +16,16 @@ async function buscarCliente(req, res) {
     }
 }
 
+async function crearCliente(req, res) {
+    try {
+        const cliente = await clienteService.crearCliente(req.body);
+        res.status(201).json(cliente);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
 module.exports = {
     buscarCliente,
+    crearCliente
 };

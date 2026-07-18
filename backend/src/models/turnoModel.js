@@ -21,6 +21,14 @@ async function crearTurno(datos) {
     return resultado.rows[0];
 }
 
+async function obtenerTurnos() {
+    const query = 'SELECT t.id, c.nombre,c.apellido, c.telefono, s.nombre AS servicio, t.fecha, t.hora, t.estado FROM turnos t INNERJOIN clientes c ON t.cliente_id = c.id INNER JOIN servicios s ON t.servicio_id = s.id ORDER BY t.fecha, t.hora';
+
+    const resultado = await pool.query(query);
+    return resultado.rows;
+}
+
 module.exports = {
     crearTurno,
+    obtenerTurnos
 };

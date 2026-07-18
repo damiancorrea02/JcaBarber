@@ -1,14 +1,18 @@
-const turnoService = require('../services/turnoService');
+const turnoService = require("../services/turnoService");
 
-async function crearTurnos(req, res) {
+async function crearTurno(req, res) {
     try {
-        const turno = await turnoService.crearTurnos(req.body);
+        const turno = await turnoService.crearTurno(req.body);
+
         res.status(201).json(turno);
+
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({
+            error: error.message
+        });
     }
 }
 
 module.exports = {
-    crearTurnos,
+    crearTurno
 };
