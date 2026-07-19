@@ -24,9 +24,8 @@ async function crearTurno(datos) {
 
 async function obtenerTurnos() {
     return await turnoModel.obtenerTurnos();
-
+}
 module.exports = {
     crearTurno,
     obtenerTurnos
 };
-}

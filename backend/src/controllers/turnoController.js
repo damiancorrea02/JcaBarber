@@ -13,6 +13,19 @@ async function crearTurno(req, res) {
     }
 }
 
+async function obtenerTurnos(req, res) {
+    try {
+        const turnos = await turnoService.obtenerTurnos();
+
+        res.json(turnos);
+    } catch (error) {
+        res.status(500).json({
+            error: error.message
+        });
+    }
+}
+
 module.exports = {
-    crearTurno
+    crearTurno,
+    obtenerTurnos
 };
