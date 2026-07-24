@@ -8,13 +8,13 @@ async function buscarPorTelefono(telefono) {
     return resultado.rows[0];
 }
 
-async function crearCliente(datos) {
-    const query = 'INSERT INTO clientes (nombre, apellido, telefono ) VALUES ($1, $2, $3) RETURNING *';
+async function buscarCliente(nombre, apellido, telefono) {
+    const query = 'select * from clientes where nombre = $1 and apellido = $2 and telefono = $3';
     
     const values = [
-        datos.nombre,
-        datos.apellido,
-        datos.telefono
+        nombre,
+        apellido,
+        telefono
     ];
 
     const resultado = await pool.query(query, values);
@@ -22,7 +22,22 @@ async function crearCliente(datos) {
     return resultado.rows[0];
 }
 
+async function crearCliente(datos) {
+    const query = 'insert into clientes(nombre, apellido, telefono) values ($1, $2, $3) returning *;';
+
+    const values = [
+        datos.nombre,
+        datos.apellido,
+        datos.telefono
+    ];
+
+    const resultado = await pool.query(query, values);
+
+    return resultado.rows[0];
+}
+
 module.exports = {
     buscarPorTelefono,
+    buscarCliente,
     crearCliente
 };
